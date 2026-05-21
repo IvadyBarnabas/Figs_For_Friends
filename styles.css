@@ -1,0 +1,366 @@
+/* ==========================================================================
+   1. ALAPOK ÉS VÁLTOZÓK (Modern fekete-piros / Sith paletta)
+   ========================================================================== */
+   :root {
+    --bg-main: #0b0f19;          /* Mély sötétkék/fekete háttér */
+    --bg-card: #161c2a;          /* Grafitszürke/fekete kártya háttér */
+    --text-light: #f8fafc;       /* Tiszta fehér szöveg */
+    --text-muted: #94a3b8;       /* Halványabb szürke a kiegészítő infóknak */
+    --primary: #ef4444;          /* Vadító vörös a gombokhoz és kiemelésekhez */
+    --primary-hover: #b91c1c;    /* Sötétebb tónusú piros a hover effektnek */
+    --accent-red: rgba(239, 68, 68, 0.1); /* Áttetsző piros fényeffektekhez */
+    --stock-green: #22c55e;      /* Raktáron státusz */
+    --order-orange: #f97316;     /* Előrendelés státusz */
+    --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.5);
+    --shadow-lg: 0 10px 25px -5px rgba(239, 68, 68, 0.2); /* Pirosas izzás hoverre */
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. ELRENDEZÉS (Grid / Flexbox struktúra)
+   ========================================================================== */
+main {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "as h"
+        "as ar"
+        "as f";
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   3. OLDALSÁV (Navigáció)
+   ========================================================================== */
+#as {
+    grid-area: as;
+    background-color: #090d16; /* Még sötétebb fekete a menünek */
+    color: #ffffff;
+    padding: 2rem 1.5rem;
+    position: fixed;
+    width: 260px;
+    height: 100vh;
+    box-shadow: var(--shadow-sm);
+    border-right: 1px solid #1e293b;
+}
+
+#as nav ul {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+#as nav li {
+    margin-bottom: 0.75rem;
+}
+
+#as nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+#as nav a:hover {
+    background-color: var(--accent-red);
+    color: var(--primary); /* Piros kiemelés hoverre */
+    padding-left: 1.25rem;
+}
+
+/* ==========================================================================
+   4. FEJLÉC (Felső sáv)
+   ========================================================================== */
+#h {
+    grid-area: h;
+    background-color: var(--bg-card);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    align-items: center;
+}
+
+#h h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   5. TARTALOM ÉS SZEKCIÓK
+   ========================================================================== */
+#ar {
+    grid-area: ar;
+    padding: 2rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.fejléc {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #161c2a 0%, #090d16 100%);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #1e293b;
+}
+
+.fejléc h1 {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.fejléc h2 {
+    font-size: 1.2rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   6. TERMÉK KÁRTYÁK (Grid rendszer)
+   ========================================================================== */
+.kartyak {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.kartya {
+    background-color: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    border: 1px solid #1e293b;
+}
+
+.kartya:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg); /* Pirosas izzó háttérfény */
+    border-color: var(--primary);
+}
+
+/* Státusz címkék */
+.status {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.raktaron {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: var(--stock-green);
+    border: 1px solid var(--stock-green);
+}
+
+.elorendeles {
+    background-color: rgba(249, 115, 22, 0.15);
+    color: var(--order-orange);
+    border: 1px solid var(--order-orange);
+}
+
+/* Kép animáció (Hoverre váltó képek) */
+.kep {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    margin-bottom: 1.25rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #0b0f19;
+}
+
+.kep img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: var(--transition);
+}
+
+.kep .masodik {
+    opacity: 0;
+}
+
+.kartya:hover .kep .elso {
+    opacity: 0;
+}
+
+.kartya:hover .kep .masodik {
+    opacity: 1;
+}
+
+/* Kártya szövegek */
+.series {
+    font-size: 0.8rem;
+    color: var(--primary); /* A széria neve is dögös piros lett */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.kartya h3 {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    
+    /* MEGNÖVELT HELY A CÍMNEK: */
+    height: 3.8rem;             /* Megemelt magasság, hogy több sor is elférjen */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;      /* Akár 3 sornyi szöveget is engedélyez */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ar {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-top: auto; /* Alulra rögzíti az árat és a gombot, ha üres hely marad */
+    margin-bottom: 1rem;
+}
+
+/* Modern Piros gomb */
+.megtekintes {
+    display: block;
+    text-align: center;
+    background-color: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.megtekintes:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* ==========================================================================
+   7. RÓLUNK SZEKCIÓ
+   ========================================================================== */
+#us {
+    background-color: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--primary);
+    border-top: 1px solid #1e293b;
+    border-right: 1px solid #1e293b;
+    border-bottom: 1px solid #1e293b;
+    margin-top: 1rem;
+}
+
+#us h2 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#us p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   8. LÁBJEGYZET
+   ========================================================================== */
+#f {
+    grid-area: f;
+    background-color: var(--bg-card);
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    border-top: 1px solid #1e293b;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   9. RESPONSIVE DESIGN (Mobilbarát nézet)
+   ========================================================================== */
+@media (max-width: 992px) {
+    main {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "h"
+            "ar"
+            "f";
+    }
+
+    #as {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        border-right: none;
+        border-bottom: 1px solid #1e293b;
+    }
+
+    #as nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0;
+    }
+
+    #as nav li {
+        margin-bottom: 0;
+    }
+
+    #h {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    #ar {
+        padding: 1rem;
+    }
+    
+    .fejléc {
+        padding: 1.5rem;
+    }
+
+    .kartyak {
+        grid-template-columns: 1fr;
+    }
+}
