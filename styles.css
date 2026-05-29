@@ -1,6 +1,3 @@
-/* ==========================================================================
-   1. ALAPOK ÉS VÁLTOZÓK (Modern fekete-piros / Sith paletta)
-   ========================================================================== */
    :root {
     --bg-main: #0b0f19;          /* Mély sötétkék/fekete háttér */
     --bg-card: #161c2a;          /* Grafitszürke/fekete kártya háttér */
@@ -30,9 +27,7 @@ body {
     line-height: 1.6;
 }
 
-/* ==========================================================================
-   2. ELRENDEZÉS (Grid / Flexbox struktúra)
-   ========================================================================== */
+
 main {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -44,9 +39,6 @@ main {
     min-height: 100vh;
 }
 
-/* ==========================================================================
-   3. OLDALSÁV (Navigáció)
-   ========================================================================== */
 #as {
     grid-area: as;
     background-color: #090d16; /* Még sötétebb fekete a menünek */
@@ -84,9 +76,7 @@ main {
     padding-left: 1.25rem;
 }
 
-/* ==========================================================================
-   4. FEJLÉC (Felső sáv)
-   ========================================================================== */
+
 #h {
     grid-area: h;
     background-color: var(--bg-card);
@@ -104,9 +94,6 @@ main {
     letter-spacing: 1px;
 }
 
-/* ==========================================================================
-   5. TARTALOM ÉS SZEKCIÓK
-   ========================================================================== */
 #ar {
     grid-area: ar;
     padding: 2rem;
@@ -137,9 +124,6 @@ main {
     font-weight: 500;
 }
 
-/* ==========================================================================
-   6. TERMÉK KÁRTYÁK (Grid rendszer)
-   ========================================================================== */
 .kartyak {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -157,6 +141,7 @@ main {
     flex-direction: column;
     transition: var(--transition);
     border: 1px solid #1e293b;
+    cursor: pointer;
 }
 
 .kartya:hover {
@@ -165,7 +150,7 @@ main {
     border-color: var(--primary);
 }
 
-/* Státusz címkék */
+
 .status {
     position: absolute;
     top: 1rem;
@@ -190,7 +175,6 @@ main {
     border: 1px solid var(--order-orange);
 }
 
-/* Kép animáció (Hoverre váltó képek) */
 .kep {
     width: 100%;
     height: 220px;
@@ -223,7 +207,6 @@ main {
     opacity: 1;
 }
 
-/* Kártya szövegek */
 .series {
     font-size: 0.8rem;
     color: var(--primary); /* A széria neve is dögös piros lett */
@@ -236,8 +219,6 @@ main {
     font-size: 1.15rem;
     color: var(--text-light);
     margin-bottom: 1rem;
-    
-    /* MEGNÖVELT HELY A CÍMNEK: */
     height: 3.8rem;             /* Megemelt magasság, hogy több sor is elférjen */
     display: -webkit-box;
     -webkit-line-clamp: 3;      /* Akár 3 sornyi szöveget is engedélyez */
@@ -253,7 +234,6 @@ main {
     margin-bottom: 1rem;
 }
 
-/* Modern Piros gomb */
 .megtekintes {
     display: block;
     text-align: center;
@@ -274,9 +254,6 @@ main {
     box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
 }
 
-/* ==========================================================================
-   7. RÓLUNK SZEKCIÓ
-   ========================================================================== */
 #us {
     background-color: var(--bg-card);
     padding: 2.5rem;
@@ -300,9 +277,6 @@ main {
     font-size: 1.05rem;
 }
 
-/* ==========================================================================
-   8. LÁBJEGYZET
-   ========================================================================== */
 #f {
     grid-area: f;
     background-color: var(--bg-card);
@@ -313,9 +287,6 @@ main {
     font-size: 0.9rem;
 }
 
-/* ==========================================================================
-   9. RESPONSIVE DESIGN (Mobilbarát nézet)
-   ========================================================================== */
 @media (max-width: 992px) {
     main {
         grid-template-columns: 1fr;
